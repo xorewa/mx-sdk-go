@@ -60,7 +60,7 @@ func CreateCoreComponents(
 		return nil, err
 	}
 
-	rater, err := createRater(ratingsConfig, networkConfig, chainParams)
+	rater, err := createRater(ratingsConfig, networkConfig, chainParams, enableEpochsHandler)
 	if err != nil {
 		return nil, err
 	}
@@ -104,14 +104,18 @@ func createChainParams(nc *data.NetworkConfig, enableEpochsHandler common.Enable
 	return sharding.NewChainParametersHolder(args)
 }
 
-func createRater(rc *data.RatingsConfig, nc *data.NetworkConfig, chainParamsHolder nodesCoordinator.ChainParametersHandler) (nodesCoordinator.ChanceComputer, error) {
+func createRater(
+	rc *data.RatingsConfig,
+	nc *data.NetworkConfig,
+	chainParamsHolder nodesCoordinator.ChainParametersHandler,
+	enableEpochsHandler common.EnableEpochsHandler,
+) (nodesCoordinator.ChanceComputer, error) {
 	ratingsConfig := createRatingsConfig(rc)
 
 	ratingDataArgs := rating.RatingsDataArg{
-		Config:                    ratingsConfig,
-		EpochNotifier:             &disabled.EpochNotifier{},
-		ChainParametersHolder:     chainParamsHolder,
-		RoundDurationMilliseconds: uint64(nc.RoundDuration),
+		Config:                ratingsConfig,
+		EpochNotifier:         &disabled.EpochNotifier{},
+		ChainParametersHolder: chainParamsHolder,
 	}
 
 	ratingsData, err := rating.NewRatingsData(ratingDataArgs)
@@ -119,7 +123,7 @@ func createRater(rc *data.RatingsConfig, nc *data.NetworkConfig, chainParamsHold
 		return nil, err
 	}
 
-	rater, err := rating.NewBlockSigningRater(ratingsData)
+	rater, err := rating.NewBlockSigningRater(ratingsData, enableEpochsHandler)
 	if err != nil {
 		return nil, err
 	}

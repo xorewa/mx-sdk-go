@@ -111,12 +111,30 @@ func (a *Accounts) RecreateTrie(_ common.RootHashHolder) error {
 	return nil
 }
 
+// RecreateTrieIfNeeded returns nil
+func (a *Accounts) RecreateTrieIfNeeded(_ common.RootHashHolder) error {
+	return nil
+}
+
 // PruneTrie does nothing
 func (a *Accounts) PruneTrie(_ []byte, _ state.TriePruningIdentifier, _ state.PruningHandler) {
 }
 
 // CancelPrune does nothing
 func (a *Accounts) CancelPrune(_ []byte, _ state.TriePruningIdentifier) {
+}
+
+// ResetPruning does nothing
+func (a *Accounts) ResetPruning() {
+}
+
+// GetEvictionWaitingListSize returns 0
+func (a *Accounts) GetEvictionWaitingListSize() int {
+	return 0
+}
+
+// SetTxHashForLatestStateAccesses does nothing
+func (a *Accounts) SetTxHashForLatestStateAccesses(_ []byte) {
 }
 
 // SetStateCheckpoint does nothing

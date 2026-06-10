@@ -13,6 +13,11 @@ func (b *Blockchain) GetFinalBlockInfo() (uint64, []byte, []byte) {
 	return 0, make([]byte, 0), make([]byte, 0)
 }
 
+// GetLastExecutedBlockInfo returns 0 and empty slices
+func (b *Blockchain) GetLastExecutedBlockInfo() (uint64, []byte, []byte) {
+	return 0, make([]byte, 0), make([]byte, 0)
+}
+
 // SetFinalBlockInfo does nothing
 func (b *Blockchain) SetFinalBlockInfo(_ uint64, _ []byte, _ []byte) {
 }
@@ -51,6 +56,11 @@ func (b *Blockchain) GetCurrentBlockHeaderHash() []byte {
 	return nil
 }
 
+// GetLastExecutedBlockHeader returns nil
+func (b *Blockchain) GetLastExecutedBlockHeader() data.HeaderHandler {
+	return nil
+}
+
 // SetCurrentBlockHeaderHash does nothing
 func (b *Blockchain) SetCurrentBlockHeaderHash(_ []byte) {
 }
@@ -70,7 +80,20 @@ func (b *Blockchain) SetCurrentBlockHeaderAndRootHash(_ data.HeaderHandler, _ []
 	return nil
 }
 
+// SetLastExecutedBlockHeaderAndRootHash returns nil
+func (b *Blockchain) SetLastExecutedBlockHeaderAndRootHash(_ data.HeaderHandler, _ []byte, _ []byte) {
+}
+
 // IsInterfaceNil returns true if there is no value under the interface
 func (b *Blockchain) IsInterfaceNil() bool {
 	return b == nil
+}
+
+// GetLastExecutionResult returns nil
+func (b *Blockchain) GetLastExecutionResult() data.BaseExecutionResultHandler {
+	return nil
+}
+
+// SetLastExecutionResult does nothing
+func (b *Blockchain) SetLastExecutionResult(_ data.BaseExecutionResultHandler) {
 }

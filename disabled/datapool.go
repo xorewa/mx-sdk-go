@@ -69,8 +69,23 @@ func (dp *DataPool) SmartContracts() storage.Cacher {
 	return nil
 }
 
+// ExecutedMiniBlocks returns nil
+func (dp *DataPool) ExecutedMiniBlocks() storage.Cacher {
+	return nil
+}
+
 // CurrentBlockTxs returns nil
 func (dp *DataPool) CurrentBlockTxs() dataRetriever.TransactionCacher {
+	return nil
+}
+
+// DirectSentTransactions returns nil
+func (dp *DataPool) DirectSentTransactions() storage.Cacher {
+	return nil
+}
+
+// PostProcessTransactions returns nil
+func (dp *DataPool) PostProcessTransactions() storage.Cacher {
 	return nil
 }
 
