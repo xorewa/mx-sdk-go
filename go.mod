@@ -192,7 +192,7 @@ replace github.com/multiversx/mx-chain-core-go => github.com/xorewa/mx-chain-cor
 
 replace github.com/multiversx/mx-chain-crypto-go => github.com/xorewa/mx-chain-crypto-go v0.0.0-20260605063708-ba9091969cd6
 
-replace github.com/multiversx/mx-chain-go => github.com/xorewa/mx-chain-go v0.0.0-20260610180540-ec043cdb3d54
+replace github.com/multiversx/mx-chain-go => github.com/xorewa/mx-chain-go v0.0.0-20260612112029-de88608d2d07
 
 replace github.com/multiversx/mx-chain-logger-go => github.com/xorewa/mx-chain-logger-go v0.0.0-20260605054918-542a098b91c6
 
@@ -206,7 +206,7 @@ replace github.com/multiversx/mx-chain-es-indexer-go => github.com/xorewa/mx-cha
 
 replace github.com/multiversx/mx-chain-scenario-go => github.com/xorewa/mx-chain-scenario-go v0.0.0-20260605070151-3597e54517b9
 
-replace github.com/multiversx/mx-chain-vm-go => github.com/xorewa/mx-chain-vm-go v0.0.0-20260611070729-3b785f3cb4d7
+replace github.com/multiversx/mx-chain-vm-go => github.com/xorewa/mx-chain-vm-go v0.0.0-20260612105011-8d68fcf72f6f
 
 replace github.com/multiversx/mx-chain-vm-v1_2-go => github.com/xorewa/mx-chain-vm-v1_2-go v0.0.0-20260605104628-89d192428322
 
