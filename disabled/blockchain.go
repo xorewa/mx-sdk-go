@@ -51,9 +51,19 @@ func (b *Blockchain) SetCurrentBlockHeader(_ data.HeaderHandler) error {
 	return nil
 }
 
+// SetCurrentBlockHeaderAndHash returns nil
+func (b *Blockchain) SetCurrentBlockHeaderAndHash(_ []byte, _ data.HeaderHandler) error {
+	return nil
+}
+
 // GetCurrentBlockHeaderHash returns nil
 func (b *Blockchain) GetCurrentBlockHeaderHash() []byte {
 	return nil
+}
+
+// GetCurrentBlockHeaderAndHash returns nil values
+func (b *Blockchain) GetCurrentBlockHeaderAndHash() (data.HeaderHandler, []byte) {
+	return nil, nil
 }
 
 // GetLastExecutedBlockHeader returns nil
@@ -92,6 +102,10 @@ func (b *Blockchain) IsInterfaceNil() bool {
 // GetLastExecutionResult returns nil
 func (b *Blockchain) GetLastExecutionResult() data.BaseExecutionResultHandler {
 	return nil
+}
+
+// SetLastExecutionInfo does nothing
+func (b *Blockchain) SetLastExecutionInfo(_ data.HeaderHandler, _ data.BaseExecutionResultHandler) {
 }
 
 // SetLastExecutionResult does nothing
