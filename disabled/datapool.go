@@ -9,6 +9,8 @@ import (
 type DataPool struct {
 }
 
+var _ dataRetriever.PoolsHolder = (*DataPool)(nil)
+
 // PeerAuthentications returns nil
 func (dp *DataPool) PeerAuthentications() storage.Cacher {
 	return nil
@@ -46,6 +48,11 @@ func (dp *DataPool) RewardTransactions() dataRetriever.ShardedDataCacherNotifier
 
 // Headers returns nil
 func (dp *DataPool) Headers() dataRetriever.HeadersPool {
+	return nil
+}
+
+// QuarantinedHeaders returns nil
+func (dp *DataPool) QuarantinedHeaders() storage.Cacher {
 	return nil
 }
 
