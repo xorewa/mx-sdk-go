@@ -192,7 +192,7 @@ replace github.com/multiversx/mx-chain-core-go => github.com/xorewa/mx-chain-cor
 
 replace github.com/multiversx/mx-chain-crypto-go => github.com/xorewa/mx-chain-crypto-go v0.0.0-20260630162109-4c1e9574b7d4
 
-replace github.com/multiversx/mx-chain-go => github.com/xorewa/mx-chain-go v0.0.0-20260722002611-8d912b2215b8
+replace github.com/multiversx/mx-chain-go => github.com/xorewa/mx-chain-go v0.0.0-20260723160126-4fdf7e40dede
 
 replace github.com/multiversx/mx-chain-logger-go => github.com/xorewa/mx-chain-logger-go v0.0.0-20260630161826-04c5818227ed
 
