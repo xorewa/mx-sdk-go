@@ -2,9 +2,17 @@ name: Tests
 
 on:
   push:
-    branches: [ main, feat/*, rc/* ]
+    branches: [NewArc]
   pull_request:
-    branches: [ main, feat/*, rc/* ]
+    branches: [NewArc]
+
+permissions:
+  contents: read
+
+env:
+  # Xorewa modules are private forks and cannot be verified by sum.golang.org.
+  # Public dependencies remain protected by the normal checksum database.
+  GONOSUMDB: github.com/xorewa/*
 
 jobs:
   test:
@@ -21,7 +29,6 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Get dependencies
-        run: |
-          go get -v -t -d ./...
+        run: go mod download
       - name: Unit tests
         run: make test

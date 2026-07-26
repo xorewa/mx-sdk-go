@@ -10,6 +10,10 @@
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
+/coverage.txt
+
+# Native library produced by the local libbls build check.
+/libraries/libbls/libbls
 
 opcode.trace
 
@@ -21,4 +25,3 @@ opcode.trace
 /esdata
 .env
 *.log
-

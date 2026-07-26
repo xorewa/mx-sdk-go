@@ -2,12 +2,17 @@ name: golangci-lint
 
 on:
   push:
-    branches: [ main, feat/*, rc/* ]
+    branches: [NewArc]
   pull_request:
-    branches: [ main, feat/*, rc/* ]
+    branches: [NewArc]
 
 permissions:
   contents: read
+
+env:
+  # Xorewa modules are private forks and cannot be verified by sum.golang.org.
+  # Public dependencies remain protected by the normal checksum database.
+  GONOSUMDB: github.com/xorewa/*
 
 jobs:
   golangci:
