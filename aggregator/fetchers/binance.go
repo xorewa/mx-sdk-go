@@ -30,7 +30,7 @@ func (b *binance) FetchPrice(ctx context.Context, base string, quote string) (fl
 	quote = b.normalizeQuoteName(quote, BinanceName)
 
 	var bpr binancePriceRequest
-	err := b.ResponseGetter.Get(ctx, fmt.Sprintf(binancePriceUrl, base, quote), &bpr)
+	err := b.Get(ctx, fmt.Sprintf(binancePriceUrl, base, quote), &bpr)
 	if err != nil {
 		return 0, err
 	}

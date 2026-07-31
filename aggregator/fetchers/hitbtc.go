@@ -29,7 +29,7 @@ func (h *hitbtc) FetchPrice(ctx context.Context, base, quote string) (float64, e
 	quote = h.normalizeQuoteName(quote, HitbtcName)
 
 	var hpr hitbtcPriceRequest
-	err := h.ResponseGetter.Get(ctx, fmt.Sprintf(hitbtcPriceUrl, base, quote), &hpr)
+	err := h.Get(ctx, fmt.Sprintf(hitbtcPriceUrl, base, quote), &hpr)
 	if err != nil {
 		return 0, err
 	}

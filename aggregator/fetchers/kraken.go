@@ -34,7 +34,7 @@ func (k *kraken) FetchPrice(ctx context.Context, base string, quote string) (flo
 	quote = k.normalizeQuoteName(quote, KrakenName)
 
 	var hpr krakenPriceRequest
-	err := k.ResponseGetter.Get(ctx, fmt.Sprintf(krakenPriceUrl, base, quote), &hpr)
+	err := k.Get(ctx, fmt.Sprintf(krakenPriceUrl, base, quote), &hpr)
 	if err != nil {
 		return 0, err
 	}

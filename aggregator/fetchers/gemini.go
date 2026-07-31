@@ -29,7 +29,7 @@ func (g *gemini) FetchPrice(ctx context.Context, base, quote string) (float64, e
 	quote = g.normalizeQuoteName(quote, GeminiName)
 
 	var gpr geminiPriceRequest
-	err := g.ResponseGetter.Get(ctx, fmt.Sprintf(geminiPriceUrl, base, quote), &gpr)
+	err := g.Get(ctx, fmt.Sprintf(geminiPriceUrl, base, quote), &gpr)
 	if err != nil {
 		return 0, err
 	}

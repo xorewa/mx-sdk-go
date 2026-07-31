@@ -34,7 +34,7 @@ func (h *huobi) FetchPrice(ctx context.Context, base string, quote string) (floa
 	quote = h.normalizeQuoteName(quote, HuobiName)
 
 	var hpr huobiPriceRequest
-	err := h.ResponseGetter.Get(ctx, fmt.Sprintf(huobiPriceUrl, strings.ToLower(base), strings.ToLower(quote)), &hpr)
+	err := h.Get(ctx, fmt.Sprintf(huobiPriceUrl, strings.ToLower(base), strings.ToLower(quote)), &hpr)
 	if err != nil {
 		return 0, err
 	}

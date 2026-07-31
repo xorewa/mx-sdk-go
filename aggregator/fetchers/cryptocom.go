@@ -37,7 +37,7 @@ func (c *cryptocom) FetchPrice(ctx context.Context, base, quote string) (float64
 	quote = c.normalizeQuoteName(quote, CryptocomName)
 
 	var cpr cryptocomPriceRequest
-	err := c.ResponseGetter.Get(ctx, fmt.Sprintf(cryptocomPriceUrl, base, quote), &cpr)
+	err := c.Get(ctx, fmt.Sprintf(cryptocomPriceUrl, base, quote), &cpr)
 	if err != nil {
 		return 0, err
 	}

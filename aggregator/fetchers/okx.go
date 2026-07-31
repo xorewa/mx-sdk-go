@@ -33,7 +33,7 @@ func (o *okx) FetchPrice(ctx context.Context, base string, quote string) (float6
 	quote = o.normalizeQuoteName(quote, OkxName)
 
 	var opr okxPriceRequest
-	err := o.ResponseGetter.Get(ctx, fmt.Sprintf(okxPriceUrl, base, quote), &opr)
+	err := o.Get(ctx, fmt.Sprintf(okxPriceUrl, base, quote), &opr)
 	if err != nil {
 		return 0, err
 	}

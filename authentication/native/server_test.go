@@ -22,8 +22,8 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-var expectedErr = errors.New("expected error")
-var httpExpectedErr = authentication.CreateHTTPStatusError(http.StatusInternalServerError, expectedErr)
+var errExpected = errors.New("expected error")
+var httpErrExpected = authentication.CreateHTTPStatusError(http.StatusInternalServerError, errExpected)
 
 func TestNativeserver_NewNativeAuthServer(t *testing.T) {
 	t.Parallel()
@@ -126,7 +126,7 @@ func TestNativeserver_Validate(t *testing.T) {
 		args := createMockArgsNativeAuthServer()
 		args.HttpClientWrapper = &testsCommon.HTTPClientWrapperStub{
 			GetHTTPCalled: func(ctx context.Context, endpoint string) ([]byte, int, error) {
-				return nil, http.StatusInternalServerError, expectedErr
+				return nil, http.StatusInternalServerError, errExpected
 			},
 		}
 		server, _ := NewNativeAuthServer(args)
@@ -134,7 +134,7 @@ func TestNativeserver_Validate(t *testing.T) {
 		err := server.Validate(&AuthToken{
 			ttl: tokenTtl,
 		})
-		require.Equal(t, httpExpectedErr, err)
+		require.Equal(t, httpErrExpected, err)
 	})
 	t.Run("token expired should error", func(t *testing.T) {
 		t.Parallel()
@@ -174,7 +174,7 @@ func TestNativeserver_Validate(t *testing.T) {
 		}
 		args.PubKeyConverter = &testscommon.PubkeyConverterStub{
 			DecodeCalled: func(humanReadable string) ([]byte, error) {
-				return nil, expectedErr
+				return nil, errExpected
 			},
 		}
 		server, _ := NewNativeAuthServer(args)
@@ -185,7 +185,7 @@ func TestNativeserver_Validate(t *testing.T) {
 		err := server.Validate(&AuthToken{
 			ttl: tokenTtl,
 		})
-		require.Equal(t, expectedErr, err)
+		require.Equal(t, errExpected, err)
 	})
 	t.Run("keyGenerator errors should error", func(t *testing.T) {
 		t.Parallel()
@@ -202,7 +202,7 @@ func TestNativeserver_Validate(t *testing.T) {
 		}
 		args.KeyGenerator = &genesisMock.KeyGeneratorStub{
 			PublicKeyFromByteArrayCalled: func(b []byte) (crypto.PublicKey, error) {
-				return nil, expectedErr
+				return nil, errExpected
 			},
 		}
 		args.PubKeyConverter = &testscommon.PubkeyConverterStub{
@@ -218,7 +218,7 @@ func TestNativeserver_Validate(t *testing.T) {
 		err := server.Validate(&AuthToken{
 			ttl: tokenTtl,
 		})
-		require.Equal(t, expectedErr, err)
+		require.Equal(t, errExpected, err)
 	})
 	t.Run("invalid http result should error", func(t *testing.T) {
 		t.Parallel()
@@ -264,7 +264,7 @@ func TestNativeserver_Validate(t *testing.T) {
 		}
 		args.Signer = &testsCommon.SignerStub{
 			VerifyMessageCalled: func(msg []byte, publicKey crypto.PublicKey, sig []byte) error {
-				return expectedErr
+				return errExpected
 			},
 		}
 		server, _ := NewNativeAuthServer(args)
@@ -275,7 +275,7 @@ func TestNativeserver_Validate(t *testing.T) {
 		err := server.Validate(&AuthToken{
 			ttl: tokenTtl,
 		})
-		require.Equal(t, expectedErr, err)
+		require.Equal(t, errExpected, err)
 	})
 	t.Run("should work - token not cached", func(t *testing.T) {
 		t.Parallel()

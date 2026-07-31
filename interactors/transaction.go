@@ -93,7 +93,7 @@ func (ti *transactionInteractor) SendTransactionsAsBunch(ctx context.Context, bu
 			transactions = make([]*transaction.FrontendTransaction, 0)
 		}
 
-		hashes, err := ti.Proxy.SendTransactions(ctx, bunch)
+		hashes, err := ti.SendTransactions(ctx, bunch)
 		if err != nil {
 			return nil, err
 		}

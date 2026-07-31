@@ -17,7 +17,7 @@ import (
 
 var testAddressAsBech32String = "erd1zptg3eu7uw0qvzhnu009lwxupcn6ntjxptj5gaxt8curhxjqr9tsqpsnht"
 var testAddress, _ = data.NewAddressFromBech32String(testAddressAsBech32String)
-var expectedErr = errors.New("expected error")
+var errExpected = errors.New("expected error")
 
 func TestAddressNonceHandler_NewAddressNonceHandlerWithPrivateAccess(t *testing.T) {
 	t.Parallel()
@@ -143,13 +143,13 @@ func TestAddressNonceHandler_getNonceUpdatingCurrent(t *testing.T) {
 
 		proxy := &testsCommon.ProxyStub{
 			GetAccountCalled: func(address core.AddressHandler) (*data.Account, error) {
-				return nil, expectedErr
+				return nil, errExpected
 			},
 		}
 
 		anh, _ := NewAddressNonceHandlerWithPrivateAccess(proxy, testAddress)
 		nonce, err := anh.getNonceUpdatingCurrent(context.Background())
-		require.Equal(t, expectedErr, err)
+		require.Equal(t, errExpected, err)
 		require.Equal(t, uint64(0), nonce)
 	})
 	t.Run("gap nonce detected", func(t *testing.T) {
@@ -193,14 +193,14 @@ func TestAddressNonceHandler_getNonceUpdatingCurrent(t *testing.T) {
 
 		proxy := &testsCommon.ProxyStub{
 			GetAccountCalled: func(address core.AddressHandler) (*data.Account, error) {
-				return nil, expectedErr
+				return nil, errExpected
 			},
 		}
 		anh, _ := NewAddressNonceHandlerWithPrivateAccess(proxy, testAddress)
 		tx := createDefaultTx()
 
 		err := anh.ApplyNonceAndGasPrice(context.Background(), &tx)
-		require.Equal(t, expectedErr, err)
+		require.Equal(t, errExpected, err)
 	})
 }
 
@@ -250,13 +250,13 @@ func TestAddressNonceHandler_ReSendTransactionsIfRequired(t *testing.T) {
 
 		proxy := &testsCommon.ProxyStub{
 			GetAccountCalled: func(address core.AddressHandler) (*data.Account, error) {
-				return nil, expectedErr
+				return nil, errExpected
 			},
 		}
 
 		anh, _ := NewAddressNonceHandlerWithPrivateAccess(proxy, testAddress)
 		err := anh.ReSendTransactionsIfRequired(context.Background())
-		require.Equal(t, expectedErr, err)
+		require.Equal(t, errExpected, err)
 	})
 	t.Run("proxy returns error shall error", func(t *testing.T) {
 		t.Parallel()
@@ -267,7 +267,7 @@ func TestAddressNonceHandler_ReSendTransactionsIfRequired(t *testing.T) {
 				return &data.Account{Nonce: blockchainNonce - 1}, nil
 			},
 			SendTransactionsCalled: func(txs []*transaction.FrontendTransaction) ([]string, error) {
-				return make([]string, 0), expectedErr
+				return make([]string, 0), errExpected
 			},
 		}
 		anh, _ := NewAddressNonceHandlerWithPrivateAccess(proxy, testAddress)
@@ -281,7 +281,7 @@ func TestAddressNonceHandler_ReSendTransactionsIfRequired(t *testing.T) {
 
 		err = anh.ReSendTransactionsIfRequired(context.Background())
 		require.Equal(t, 1, len(anh.transactions))
-		require.Equal(t, expectedErr, err)
+		require.Equal(t, errExpected, err)
 	})
 	t.Run("account.Nonce == anh.computedNonce", func(t *testing.T) {
 		t.Parallel()
@@ -377,7 +377,7 @@ func TestAddressNonceHandler_fetchGasPriceIfRequired(t *testing.T) {
 	// proxy returns error should set invalid gasPrice(0)
 	proxy := &testsCommon.ProxyStub{
 		GetNetworkConfigCalled: func() (*data.NetworkConfig, error) {
-			return nil, expectedErr
+			return nil, errExpected
 		},
 	}
 	anh, _ := NewAddressNonceHandlerWithPrivateAccess(proxy, testAddress)

@@ -71,7 +71,7 @@ func (des *deserializer) setFields(reflectedValue reflect.Value, buffer *SourceB
 			return buffer.Pos(), errors.New("empty buffer")
 		}
 
-		if (reflectedValueField.Kind() == reflect.Struct || reflectedValueField.Kind() == reflect.Ptr) &&
+		if (reflectedValueField.Kind() == reflect.Struct || reflectedValueField.Kind() == reflect.Pointer) &&
 			reflect.TypeOf(valueFromBuffer) == reflect.TypeOf([]byte{}) {
 			usedBytes, err := des.CreateStruct(reflectedValueField, valueFromBuffer.([]byte))
 			if err != nil {
@@ -105,7 +105,7 @@ func (des *deserializer) getReflectedValue(obj interface{}) (value reflect.Value
 	} else {
 		value = reflect.ValueOf(obj)
 	}
-	if value.Kind() == reflect.Interface || value.Kind() == reflect.Ptr {
+	if value.Kind() == reflect.Interface || value.Kind() == reflect.Pointer {
 		value = value.Elem()
 	}
 
@@ -154,7 +154,7 @@ func (des *deserializer) getNextValueFromBuffer(buffer *SourceBuffer, v reflect.
 			return *big.NewInt(0).SetBytes(buff), eof
 		}
 		return buffer.OffBytes(), false
-	case reflect.Ptr:
+	case reflect.Pointer:
 		return buffer.OffBytes(), false
 	default:
 		return nil, true

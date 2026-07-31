@@ -102,15 +102,15 @@ func (sb *SourceBuffer) NextUint8() (uint8, bool) {
 //NextBool returns the next byte after offset as bool and increase offset position
 func (sb *SourceBuffer) NextBool() (bool, bool) {
 	val, eof := sb.NextByte()
-	data := false
-	if val == 0 {
-		data = false
-	} else if val == 1 {
-		data = true
-	} else {
+	switch val {
+	case 0:
+		return false, eof
+	case 1:
+		return true, eof
+	default:
 		eof = true
 	}
-	return data, eof
+	return false, eof
 }
 
 //BackUp decrease offset position with n bytes

@@ -50,7 +50,7 @@ func (tap *TrackableAddressProviderMock) PrivateKeyOfBech32Address(addressAsBech
 	tap.RLock()
 	defer tap.RUnlock()
 
-	skBytes, _ := tap.trackedAddresses[addressAsBech32]
+	skBytes := tap.trackedAddresses[addressAsBech32]
 
 	return skBytes
 }

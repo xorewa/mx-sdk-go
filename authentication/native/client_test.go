@@ -73,13 +73,13 @@ func TestNativeAuthClient_GetAccessToken(t *testing.T) {
 		args := createMockArgsNativeAuthClient()
 		args.Proxy = &testsCommon.ProxyStub{
 			GetLatestHyperBlockNonceCalled: func(ctx context.Context) (uint64, error) {
-				return 0, expectedErr
+				return 0, errExpected
 			}}
 		client, _ := NewNativeAuthClient(args)
 
 		token, err := client.GetAccessToken()
 		require.Equal(t, "", token)
-		require.Equal(t, expectedErr, err)
+		require.Equal(t, errExpected, err)
 	})
 	t.Run("proxy returns error for GetHyperBlockByNonce", func(t *testing.T) {
 		t.Parallel()
@@ -87,14 +87,14 @@ func TestNativeAuthClient_GetAccessToken(t *testing.T) {
 		args := createMockArgsNativeAuthClient()
 		args.Proxy = &testsCommon.ProxyStub{
 			GetHyperBlockByNonceCalled: func(ctx context.Context, nonce uint64) (*data.HyperBlock, error) {
-				return &data.HyperBlock{}, expectedErr
+				return &data.HyperBlock{}, errExpected
 			},
 		}
 		client, _ := NewNativeAuthClient(args)
 
 		token, err := client.GetAccessToken()
 		require.Equal(t, "", token)
-		require.Equal(t, expectedErr, err)
+		require.Equal(t, errExpected, err)
 	})
 	t.Run("signer errors when sign message", func(t *testing.T) {
 		t.Parallel()
@@ -102,14 +102,14 @@ func TestNativeAuthClient_GetAccessToken(t *testing.T) {
 		args := createMockArgsNativeAuthClient()
 		args.Signer = &testsCommon.SignerStub{
 			SignMessageCalled: func(msg []byte, privateKey crypto.PrivateKey) ([]byte, error) {
-				return make([]byte, 0), expectedErr
+				return make([]byte, 0), errExpected
 			},
 		}
 		client, _ := NewNativeAuthClient(args)
 
 		token, err := client.GetAccessToken()
 		require.Equal(t, "", token)
-		require.Equal(t, expectedErr, err)
+		require.Equal(t, errExpected, err)
 	})
 	t.Run("token handler returns error should error", func(t *testing.T) {
 		t.Parallel()
@@ -141,14 +141,14 @@ func TestNativeAuthClient_GetAccessToken(t *testing.T) {
 		}
 		args.TokenHandler = &mock.AuthTokenHandlerStub{
 			EncodeCalled: func(authToken authentication.AuthToken) (string, error) {
-				return "", expectedErr
+				return "", errExpected
 			},
 		}
 		client, _ := NewNativeAuthClient(args)
 		client.token = ""
 
 		token, err := client.GetAccessToken()
-		require.Equal(t, expectedErr, err)
+		require.Equal(t, errExpected, err)
 		require.Equal(t, "", token)
 	})
 	t.Run("should work, nil token", func(t *testing.T) {

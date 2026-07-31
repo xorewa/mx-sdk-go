@@ -35,7 +35,7 @@ func (b *bitfinex) FetchPrice(ctx context.Context, base, quote string) (float64,
 		priceUrl = bitfinexPriceLongUrl
 	}
 	var bit bitfinexPriceRequest
-	err := b.ResponseGetter.Get(ctx, fmt.Sprintf(priceUrl, base, quote), &bit)
+	err := b.Get(ctx, fmt.Sprintf(priceUrl, base, quote), &bit)
 	if err != nil {
 		return 0, err
 	}

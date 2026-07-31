@@ -17,7 +17,7 @@ import (
 var (
 	suite         = ed25519.NewEd25519()
 	keyGen        = signing.NewKeyGenerator(suite)
-	expectedError = errors.New("expected error")
+	errExpected   = errors.New("expected error")
 )
 
 func TestSigner_SignMessage_VerifyMessage(t *testing.T) {

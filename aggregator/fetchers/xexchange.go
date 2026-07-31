@@ -61,7 +61,7 @@ func (x *xExchange) FetchPrice(ctx context.Context, base string, quote string) (
 		return 0, err
 	}
 
-	resp, err := x.GraphqlGetter.Query(ctx, dataApiUrl, query, string(vars))
+	resp, err := x.Query(ctx, dataApiUrl, query, string(vars))
 	if err != nil {
 		return 0, err
 	}

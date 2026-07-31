@@ -17,11 +17,11 @@ func TestNativeserver_Decode(t *testing.T) {
 
 		handler := NewAuthTokenHandler()
 		handler.decodeHandler = func(s string) ([]byte, error) {
-			return make([]byte, 0), expectedErr
+			return make([]byte, 0), errExpected
 		}
 		token, err := handler.Decode("address.body.signature")
 		require.Nil(t, token)
-		require.Equal(t, expectedErr, err)
+		require.Equal(t, errExpected, err)
 	})
 	t.Run("decodeHandler errors for body should error", func(t *testing.T) {
 		t.Parallel()
@@ -31,11 +31,11 @@ func TestNativeserver_Decode(t *testing.T) {
 			if s == "address" {
 				return nil, nil
 			}
-			return make([]byte, 0), expectedErr
+			return make([]byte, 0), errExpected
 		}
 		token, err := handler.Decode("address.body.signature")
 		require.True(t, check.IfNil(token))
-		require.Equal(t, expectedErr, err)
+		require.Equal(t, errExpected, err)
 	})
 	t.Run("hexDecodeHandler errors should error", func(t *testing.T) {
 		t.Parallel()
@@ -45,11 +45,11 @@ func TestNativeserver_Decode(t *testing.T) {
 			return []byte("host.blockHash.ttl.extraInfo"), nil
 		}
 		handler.hexDecodeHandler = func(s string) ([]byte, error) {
-			return nil, expectedErr
+			return nil, errExpected
 		}
 		token, err := handler.Decode("address.body.signature")
 		require.Nil(t, token)
-		require.Equal(t, expectedErr, err)
+		require.Equal(t, errExpected, err)
 	})
 	t.Run("decodeHandler errors for host should error", func(t *testing.T) {
 		t.Parallel()
@@ -60,7 +60,7 @@ func TestNativeserver_Decode(t *testing.T) {
 				return []byte("host.blockHash.ttl.extraInfo"), nil
 			}
 			if s == "host" {
-				return make([]byte, 0), expectedErr
+				return make([]byte, 0), errExpected
 			}
 			return nil, nil
 		}
@@ -69,7 +69,7 @@ func TestNativeserver_Decode(t *testing.T) {
 		}
 		token, err := handler.Decode("address.body.signature")
 		require.Nil(t, token)
-		require.Equal(t, expectedErr, err)
+		require.Equal(t, errExpected, err)
 	})
 	t.Run("ParseInt errors for ttl should error", func(t *testing.T) {
 		t.Parallel()
@@ -97,7 +97,7 @@ func TestNativeserver_Decode(t *testing.T) {
 				return []byte("host.blockHash.1234.extraInfo"), nil
 			}
 			if s == "extraInfo" {
-				return make([]byte, 0), expectedErr
+				return make([]byte, 0), errExpected
 			}
 			return nil, nil
 		}
@@ -106,7 +106,7 @@ func TestNativeserver_Decode(t *testing.T) {
 		}
 		token, err := handler.Decode("address.body.signature")
 		require.Nil(t, token)
-		require.Equal(t, expectedErr, err)
+		require.Equal(t, errExpected, err)
 	})
 }
 
