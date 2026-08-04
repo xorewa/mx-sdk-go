@@ -699,6 +699,7 @@ github.com/wlynxg/anet v0.0.5 h1:J3VJGi1gvo0JwZ/P1/Yc/8p63SoW98B5dHkYDmpgvvU=
 github.com/wlynxg/anet v0.0.5/go.mod h1:eay5PRQr7fIVAMbTbchTnO9gG65Hg/uYGdc7mguHxoA=
 github.com/xorewa/bls-go-binary v0.0.0-20250924002409-446538da6433 h1:xk3EPwP73+xDtHaKU9AbC3kkPUE2CaVkv7swyIhkvnM=
 github.com/xorewa/bls-go-binary v0.0.0-20250924002409-446538da6433/go.mod h1:O4Vp1AfR4raRGwFeQpr9X/PQtncEicMoOe6BQt1oX0Y=
+github.com/xorewa/bls-go-binary v0.0.0-20260731163832-566eb78d4b77/go.mod h1:4yhp7kJvmR5IdrFh3gI9p1r3P+k2VOtXeswkZ8n9zDI=
 github.com/xorewa/mx-chain-communication-go v0.0.0-20260726075341-d703206be848 h1:OGRfsBxRyweQjwIQ+tmrbpYIhshAtwroxTnhFUjjM6I=
 github.com/xorewa/mx-chain-communication-go v0.0.0-20260726075341-d703206be848/go.mod h1:3iEVh51EKpItURjG3fVJRyjsaOXvqUDF4l3Z23ED5X8=
 github.com/xorewa/mx-chain-communication-go v0.0.0-20260801092431-483cc64b4e4b/go.mod h1:RMS/7TUlf42Vmn45A8i1qB9T5ulAXPeNzkqk/OcYb7w=
